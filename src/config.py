@@ -1,7 +1,7 @@
 import os
 
 # Model configuration: "tiny", "base", "small", "medium", "large"
-MODEL_SIZE = "small"
+MODEL_SIZE = "small" #small
 
 # Directories
 AUDIO_DIR = os.path.join(os.getcwd(), "audio")
