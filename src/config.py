@@ -13,10 +13,6 @@ os.makedirs(CAPTIONS_DIR, exist_ok=True)
 # config.py
 SUPPORTED_LANGUAGES = {
     "en": "English",
-    "es": "Spanish",
-    "fr": "French",
-    "de": "German",
-    "hi": "Hindi"
 }
 
 DEFAULT_LANGUAGE = "en"

@@ -145,7 +145,7 @@ with col1:
     uploaded_file = st.file_uploader("📂 Upload an audio file", type=["mp3", "wav", "m4a"])
 
 with col2:
-    language = st.selectbox("🌍 Select Language", 
+    language = st.selectbox("🌍 Transcript Language", 
                             options=list(SUPPORTED_LANGUAGES.keys()),
                             format_func=lambda x: SUPPORTED_LANGUAGES[x],
                             index=list(SUPPORTED_LANGUAGES.keys()).index(DEFAULT_LANGUAGE))
