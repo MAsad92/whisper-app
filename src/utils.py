@@ -11,6 +11,7 @@
 #     with open(output_path, "w", encoding="utf-8") as f:
 #         f.write(text)
 #     print(f"[+] Captions saved to {output_path}")
+import re
 
 def format_timestamp(seconds: float) -> str:
     """Convert seconds to SRT hh:mm:ss,ms format."""
@@ -31,3 +32,27 @@ def save_srt(segments, path: str):
             start = format_timestamp(seg["start"])
             end = format_timestamp(seg["end"])
             f.write(f"{i}\n{start} --> {end}\n{seg['text'].strip()}\n\n")
+
+def highlight_keywords(text, keywords):
+    """Highlight keywords in transcript using Markdown bold style."""
+    if not keywords:
+        return text
+    regex = re.compile(r"\b(" + "|".join(map(re.escape, keywords)) + r")\b", re.IGNORECASE)
+    return regex.sub(r"**\1**", text)
+
+def format_transcript(text, max_sentences=3):
+    """
+    Split transcript into paragraphs with line breaks after a few sentences.
+    """
+    import re
+    # Split by sentence endings (.?!)
+    sentences = re.split(r'(?<=[.!?]) +', text)
+    
+    # Group into chunks
+    paragraphs = []
+    for i in range(0, len(sentences), max_sentences):
+        chunk = " ".join(sentences[i:i+max_sentences])
+        paragraphs.append(chunk.strip())
+    
+    # Join with double line breaks
+    return "\n\n".join(paragraphs)    

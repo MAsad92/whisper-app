@@ -9,3 +9,14 @@ CAPTIONS_DIR = os.path.join(os.getcwd(), "captions")
 
 # Ensure output directory exists
 os.makedirs(CAPTIONS_DIR, exist_ok=True)
+
+# config.py
+SUPPORTED_LANGUAGES = {
+    "en": "English",
+    "es": "Spanish",
+    "fr": "French",
+    "de": "German",
+    "hi": "Hindi"
+}
+
+DEFAULT_LANGUAGE = "en"

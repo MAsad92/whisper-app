@@ -24,13 +24,23 @@ class Transcriber:
     def __init__(self, model_name="base"):
         self.model = whisper.load_model(model_name)
 
-    def transcribe(self, audio_path: str, out_dir="captions"):
-        result = self.model.transcribe(audio_path, task="transcribe")
+    
+    def transcribe_audio(self, file_path, language="en"):
+        """Full transcript + segments with timestamps"""
+        result = self.model.transcribe(file_path, language=language, task="transcribe")
+        return result
+    
+    def get_segments(self, file_path, language="en"):
+        result = self.model.transcribe(file_path, language=language, task="transcribe")
+        return result.get("segments", [])
 
-        transcript_path = f"{out_dir}/transcript.txt"
-        srt_path = f"{out_dir}/captions.srt"
+    # def transcribe(self, audio_path: str, out_dir="captions"):
+    #     result = self.model.transcribe(audio_path, task="transcribe")
 
-        save_transcript(result["text"], transcript_path)
-        save_srt(result["segments"], srt_path)
+    #     transcript_path = f"{out_dir}/transcript.txt"
+    #     srt_path = f"{out_dir}/captions.srt"
 
-        return result, transcript_path, srt_path
+    #     save_transcript(result["text"], transcript_path)
+    #     save_srt(result["segments"], srt_path)
+
+    #     return result, transcript_path, srt_path
